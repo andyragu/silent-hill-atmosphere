@@ -1,22 +1,27 @@
 import * as THREE from 'three';
+import { setupSky } from './sky'
 
+// Initialize scene and camera
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 100);
 
+scene.fog = new THREE.FogExp2( 0xcccccc, 0.05);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Create a Plane
-const planeGeometry = new THREE.PlaneGeometry(5, 5);
-const planeMaterial = new THREE.MeshBasicMaterial({ color: 0x50C878, side: THREE.DoubleSide });
+const planeGeometry = new THREE.PlaneGeometry(10, 10);
+const planeMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.DoubleSide });
 const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
 plane.rotation.x = Math.PI / 2; // Rotate the plane to be horizontal
 plane.position.set(0, -1, 0); 
 
 scene.add(plane);
+
+setupSky(scene)
 
 camera.position.z = 5;
 
