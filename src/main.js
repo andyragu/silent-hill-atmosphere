@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { setupSky } from './sky'
+import { createSnow, updateParticles } from './snow';
 
 // Initialize scene and camera
 const scene = new THREE.Scene();
@@ -23,10 +24,14 @@ scene.add(plane);
 
 setupSky(scene)
 
+createSnow(scene, camera)
+
 camera.position.z = 5;
 
 function animate() {
+  requestAnimationFrame(animate);
+  updateParticles();
   renderer.render(scene, camera);
 }
 
-renderer.setAnimationLoop(animate);
+animate();
