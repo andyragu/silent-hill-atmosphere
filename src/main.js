@@ -1,6 +1,12 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { setupSky } from './sky'
 import { createSnow, updateParticles } from './snow';
+
+// TODO: Create orbit controls
+// TODO: Fix Snow Generation
+// TODO: Create terrain generator
+// TODO: Fix camera
 
 // Initialize scene and camera
 const scene = new THREE.Scene();
