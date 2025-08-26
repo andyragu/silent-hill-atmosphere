@@ -3,7 +3,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { setupSky } from './sky'
 import { createSnow, updateParticles } from './snow';
 
-// TODO: Create orbit controls
 // TODO: Fix Snow Generation
 // TODO: Create terrain generator
 // TODO: Fix camera
@@ -12,11 +11,15 @@ import { createSnow, updateParticles } from './snow';
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 100);
 
-scene.fog = new THREE.FogExp2( 0xcccccc, 0.05);
+scene.fog = new THREE.FogExp2( 0xcccccc, 0.02);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+
+// Initialize orbit controls
+const controls = new OrbitControls( camera, renderer.domElement );
+controls.enableZoom = false;
 
 // Create a Plane
 const planeGeometry = new THREE.PlaneGeometry(10, 10);
@@ -32,11 +35,13 @@ setupSky(scene)
 
 createSnow(scene, camera)
 
-camera.position.z = 5;
+camera.position.set(0, 5, 15);
+controls.update();
 
 function animate() {
   requestAnimationFrame(animate);
-  updateParticles();
+  controls.update()
+  // updateParticles();
   renderer.render(scene, camera);
 }
 
