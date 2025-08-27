@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { ImprovedNoise } from 'three/addons/math/ImprovedNoise.js';
 import { setupSky } from './sky'
 import { createSnow, updateParticles } from './snow';
 
@@ -20,16 +21,6 @@ document.body.appendChild(renderer.domElement);
 // Initialize orbit controls
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.enableZoom = false;
-
-// Create a Plane
-const planeGeometry = new THREE.PlaneGeometry(10, 10);
-const planeMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.DoubleSide });
-const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-
-plane.rotation.x = Math.PI / 2; // Rotate the plane to be horizontal
-plane.position.set(0, -1, 0); 
-
-scene.add(plane);
 
 setupSky(scene)
 
