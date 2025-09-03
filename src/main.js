@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { ImprovedNoise } from 'three/addons/math/ImprovedNoise.js';
 import { setupSky } from './sky'
 import { createSnow, updateParticles } from './snow';
 
@@ -28,6 +27,19 @@ createSnow(scene, camera)
 
 camera.position.set(0, 5, 15);
 controls.update();
+
+window.addEventListener( 'resize', onWindowResize );
+
+function onWindowResize() {
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize( window.innerWidth, window.innerHeight );
+
+  animate();
+
+}
 
 function animate() {
   requestAnimationFrame(animate);

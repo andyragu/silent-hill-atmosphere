@@ -3,11 +3,11 @@ import { Sky } from 'three/addons/objects/Sky.js';
 
 export function setupSky(
     scene,
-    scale = 45000,
-    turbidity = 100,
-    rayleigh = 0.001,
-    mieCoefficient = 0.001,
-    mieDirectionalG = 0.1,
+    scale = 450000,
+    turbidity = 2.5,
+    rayleigh = 3.5,
+    mieCoefficient = 0.005,
+    mieDirectionalG = 0.5,
 ) {
     const sky = new Sky()
     sky.scale.setScalar(scale);
@@ -22,7 +22,7 @@ export function setupSky(
     const phi = THREE.MathUtils.degToRad(90 - 10);
     const theta = THREE.MathUtils.degToRad(180);
     sun.setFromSphericalCoords(1, phi, theta);
-    skyUniforms['sunPosition'].value.set(0, -1, 0);
+    skyUniforms['sunPosition'].value.set(1, 0, 0);
 
     scene.add(sky);
 }

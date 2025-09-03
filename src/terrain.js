@@ -1,3 +1,5 @@
+import { ImprovedNoise } from 'three/addons/math/ImprovedNoise.js';
+
 const worldWidth = 256, worldDepth = 256
 
 const data = generateHeight( worldWidth, worldDepth );
@@ -18,5 +20,19 @@ function generateTerrain() {
 
 
 function generateHeight( width, height ) {
+    
+    const elevation = []
+    const noise = new ImprovedNoise()
+
+    for (let y = 0; y < height; y++) {
+        elevation[y] = []
+        const ny = y / height
+        for (let x = 0; x < width; x++) {
+            const nx = x / width;
+            elevation[y][x] = noise.noise(nx, ny)
+        }
+    }
+
+    return elevation
 
 }
